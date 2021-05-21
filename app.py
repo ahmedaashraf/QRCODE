@@ -11,7 +11,7 @@ from generate import generate
 import os
 flask_app = Flask(__name__) # Initializting APP name
 cors = CORS(flask_app)
-flask_app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 @flask_app.errorhandler(404) 
 def not_found(e): 
@@ -67,6 +67,7 @@ class MainClass(Resource):
 		qrcode.save(output, format='JPEG')  
 		output.seek(0)
 		response = send_file(output, as_attachment=True, attachment_filename="QRCODE.jpeg")
+		response.headers.add('Access-Control-Allow-Origin', '*')
 
 
 		
