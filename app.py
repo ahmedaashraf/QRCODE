@@ -64,6 +64,7 @@ class MainClass(Resource):
 		qrcode.save(output, format='JPEG')  
 		output.seek(0)
 		response = send_file(output, as_attachment=True, attachment_filename="QRCODE.jpeg")
+		response.headers.add('Access-Control-Allow-Origin', '*')
 
 		
 		try:
