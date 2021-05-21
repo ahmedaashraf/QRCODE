@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template,send_file # Importing flask features
+from flask_cors import CORS
 from flask_restplus import Api, Resource, fields # RestPlus adds swagger to flask and also the overriding of the APIs
 from werkzeug.datastructures import FileStorage
 from werkzeug import secure_filename
@@ -9,7 +10,7 @@ from generate import generate
 
 import os
 flask_app = Flask(__name__) # Initializting APP name
- 
+cors = CORS(flask_app)
 
 @flask_app.errorhandler(404) 
 def not_found(e): 
@@ -64,7 +65,7 @@ class MainClass(Resource):
 		qrcode.save(output, format='JPEG')  
 		output.seek(0)
 		response = send_file(output, as_attachment=True, attachment_filename="QRCODE.jpeg")
-		response.headers.add('Access-Control-Allow-Origin', '*')
+
 
 		
 		try:
