@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template,send_file # Importing flask features
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_restplus import Api, Resource, fields # RestPlus adds swagger to flask and also the overriding of the APIs
 from werkzeug.datastructures import FileStorage
 from werkzeug import secure_filename
@@ -11,6 +11,7 @@ from generate import generate
 import os
 flask_app = Flask(__name__) # Initializting APP name
 cors = CORS(flask_app)
+flask_app.config['CORS_HEADERS'] = 'Content-Type'
 
 @flask_app.errorhandler(404) 
 def not_found(e): 
@@ -37,6 +38,7 @@ upload_parser.add_argument('file', location='files',
 
 # Initilizing the API route
 @name_space.route("/api/v1.0/")
+@cross_origin()
 class MainClass(Resource):
 	# Defining the responses, params is the sentence to be checked!
 	@app.doc(responses={ 200: 'OK', 400: 'Invalid Input'},params={ 'file': 'Include image file',"link":"Link","size":"qr code size" })
