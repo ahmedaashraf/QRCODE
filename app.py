@@ -10,8 +10,8 @@ from generate import generate
 
 import os
 flask_app = Flask(__name__) # Initializting APP name
-cors = CORS(flask_app)
-flask_app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(flask_app,allow_headers='Content-Type')
+
 
 @flask_app.errorhandler(404) 
 def not_found(e): 
@@ -30,7 +30,6 @@ name_space = app.namespace('generate', description='Returns a QRCODE')
 upload_parser = app.parser()
 upload_parser.add_argument('size',location='args',required=True)
 upload_parser.add_argument('link',location='args',required=True)
-upload_parser.add_argument('size',location='args',required=True)
 upload_parser.add_argument('file', location='files',
                            type=FileStorage, required=False)
 
