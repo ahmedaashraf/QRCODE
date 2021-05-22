@@ -14,7 +14,7 @@ def generate(text,image,size):
 	
 	if image is not None:
 		logo_display = image
-		logo_display.thumbnail((60, 60))
+		logo_display.thumbnail((240, 240))
 		logo_pos = ((img.size[0]- logo_display.size[0])// 2, (img.size[1] -logo_display.size[1]) //2)
 		img.paste(logo_display,logo_pos)
 		
