@@ -1,11 +1,12 @@
 import qrcode
 
 def generate(text,image,size):
+
 	qr = qrcode.QRCode(
 		version=1,
 		error_correction=qrcode.constants.ERROR_CORRECT_H,
-		box_size=size,
-		border=5,
+		box_size=int(size),
+		border=5
 	)
 	qr.add_data(text)
 	qr.make(fit=True)
